@@ -1,0 +1,179 @@
+CREATE DATABASE liblight;
+use liblight;
+CREATE TABLE books( b_id int NOT NULL PRIMARY KEY, title varchar(50), author varchar(50), genre varchar(30), price varchar(30), status varchar(50));
+CREATE TABLE user(user_id int NOT NULL PRIMARY KEY, username varchar(25) NOT NULL, name varchar(30) NOT NULL, email_id varchar(25) NOT NULL, mobile_no varchar(25) NOT NULL, password varchar(30) NOT NULL, dob date NOT NULL, membership varchar(30) NOT NULL);
+CREATE TABLE admin( id int not null primary key, uname varchar(30), passwd varchar(30));
+INSERT INTO books(b_id, title, author, genre, price, status) VALUES
+(1, 'Pride and Prejudice', 'Jane Austen', 'romance', '250rs', 'Available'),
+(2, 'Little Women', 'Louisa May Alcott', 'coming of age', '200rs', 'Issued'),
+(3, 'Percy Jackson and the Lightning Thief', 'Rick Riordan', 'fantasy fiction', '200rs', 'Available'),
+(4, 'Dracula', 'Bram Stoker', 'horror fiction', '130rs','Issued'),
+(5, 'Wuthering Heights', 'Emily Bronte', 'gothic fiction', '100rs', 'Available'),
+(6, 'Kafka on the Shore', 'Haruki Murakami', 'fantasy fiction', '500rs', 'Available'),
+(7, 'Taming of the Shrew', 'William Shakespeare', 'renaissance drama', '200rs', 'Issued'),
+(8, 'The Picture of Dorian Gray', 'Oscar Wilde', 'gothic fiction', '140rs', 'Issued'),
+(9, 'The Outsiders', 'S.E Hinton', 'young adult fiction', '235rs', 'Available'),
+(10,'The Catcher in the Rye', 'J.D Salinger','coming of age', '300rs', 'Available'),
+(11, 'The Secret History', 'Donna Tartt', 'psychological fiction', '500rs', 'Issued'),
+(12, 'Le Petit Prince', 'Antoine de Saint-Exupery', 'childrens literature', '200rs', 'Available'),
+(13, 'Ninth House', 'Leigh Bardugo', 'fantasy fiction', '400rs', 'Available'),
+(14, 'To Kill a Mockingbird', 'Harper Lee', 'coming of age', '250rs', 'Issued'),
+(15, 'A Thousand Splendid Suns', 'Khaled Hosseini', 'domestic fiction', '400rs', 'Available');
+ALTER TABLE books
+ADD current_reader varchar(20) not null after status;
+UPDATE books
+set current_reader='ash'
+where b_id= 2;
+UPDATE books
+set current_reader='fawn'
+where b_id=4;
+UPDATE books
+set current_reader='bee'
+where b_id=7;
+UPDATE books
+set current_reader='elle'
+where b_id=8;
+update books
+set current_reader='lea'
+where b_id=11;
+update books
+set current_reader='kim'
+where b_id=14;
+ALTER TABLE books
+ADD issued_on date not null after current_reader;
+
+update books
+set issued_on= 20221201
+where b_id=2;
+update books
+set issued_on = 20230107
+where b_id=4;
+update books
+set issued_on=20221215
+where b_id= 7;
+update books
+set issued_on=20230105
+where b_id=8;
+update books
+set issued_on=20230118
+where b_id=11;
+update books
+set issued_on= 20230120
+where b_id=14;
+
+INSERT INTO user VALUES
+(101, 'ash', 'ash a', 'ash@gmail.com', '1234567890', 'abc', '19970901', 'silver'),
+(102, 'bee', 'bee sharma','bee@gmail.com', '1122334455', 'xyz', '19951230', 'bronze'),
+(103, 'cein', 'cein gupta', 'cein@gmail.com', '2832145678', 'pqr', '19951013', 'gold'),
+(104, 'dove', 'dove cameron','dove@gmail.com', '9969879345', 'qrs', '19940912', 'silver'),
+(105, 'elle', 'elle jacobs','elle@gmail.com', '9869783254', 'fgh', '19940218', 'bronze'),
+(106, 'fawn','fawn woods', 'fawn@gmail.com', '6366645678', 'hij', '19930309', 'bronze'),
+(107, 'gru', 'gru hemmings','gru@gmail.com', '2234577890', 'vik', '19921204', 'gold'),
+(108, 'hyyih', 'hyyih huening', 'hyyih@gmail.com', '1234588769', 'hiy', '20050504', 'bronze'),
+(109, 'inez', 'inez h','inez@gmail.com', '8765493211', 'bcd', '20040611', 'gold'),
+(110, 'jill', 'jill jenkins','jill@gmail.com', '5674833456', 'jjk', '20031124', 'silver'),
+(111, 'kim', 'kim d', 'kim@gmail.com', '199412090', 'knj', '20020814', 'bronze'),
+(112, 'lea', 'lea lovegood','lea@gmail.com', '200560023', 'myg', '20130613', 'silver'),
+(113, 'mina', 'mina choi','mina@gmail.com', '199850434', 'cmk', '20110521', 'gold'),
+(114, 'niti', 'niti kapoor', 'niti@gmail.com', '200340908', 'art', '20000712', 'silver'),
+(115, 'oshi','oshi das', 'oshi@gmail.com', '198745678', 'thv', '20040116', 'bronze');
+
+alter table user
+add fines decimal(5,2) not null after dob;
+
+insert into admin values
+(1, 'aashwija', '123'),
+(2, 'nayana', '456'),
+(3, 'miyana', '789');
+
+ALTER TABLE books
+ALTER price SET DEFAULT "150rs";
+ALTER TABLE books
+ALTER issued_on SET DEFAULT '0000-00-00';
+ALTER TABLE books
+ALTER current_reader SET DEFAULT " ";
+ALTER TABLE user
+ALTER password SET DEFAULT 'tlib123';
+ALTER TABLE books
+ALTER status SET DEFAULT 'Available';
+ALTER TABLE user
+ALTER fines SET DEFAULT 0.00;
+ALTER TABLE user
+ALTER membership SET DEFAULT 'bronze';
+
+alter table user
+drop column fines;
+
+alter table user
+add column fines decimal(15,2) not null after dob;
+
+alter table user
+alter fines set default 0.00;
+
+alter table user
+add column due_amount decimal(15,2);
+
+alter table user
+alter due_amount set default 0.00;
+
+update user set due_amount=0.00;
+
+update books
+set current_reader = 'ash'
+where b_id = 1;
+
+update books
+set issued_on = 20221201
+where b_id= 2;
+
+update books
+set issued_on = 20221220
+where b_id=1;
+
+update books
+set issued_on = 20230107
+where b_id=4;
+
+update books 
+set issued_on =20221205 
+where b_id = 6;
+
+update books
+set current_reader= 'inez'
+where b_id=6;
+
+update books
+set issued_on = 20221215
+where b_id=7;
+
+update books
+set issued_on = 20230124
+where b_id=8;
+
+update books
+set status= 'Issued'
+where b_id=1;
+
+update books
+set issued_on = 20230203
+where b_id = 11;
+
+update books
+set issued_on = 20230205
+where b_id=14;
+
+CREATE TABLE borrowed_books(sl_no int(3) primary key auto_increment,bk_id int not null, title varchar(100), author varchar(100), borrowed_by varchar(100), issued_on date, due_on date, returned_on date default 00000000, fine decimal(15,2) not null default 0.00 , status varchar(30) default '-');
+
+insert into borrowed_books(bk_id, title, author, borrowed_by, issued_on, due_on, returned_on)
+values
+(13, 'Ninth House', 'Leigh Bardugo', 'inez', 20220605, 20220612, 20220611),
+(2, 'Little Women', 'Louisa May Alcott', 'mina', 20220618,20220625, 20220622),
+(9, 'The Outsiders', 'S.E Hinton', 'gru', 20220715,20220722, 20220722),
+(2, 'Little Women', 'Louisa May Alcott', 'ash', 20221201, 20221208, 00000000),
+(6, 'Kafka on the Shore', 'Haruki Murakami', 'inez', 20221205, 20221212, 00000000),
+(7, 'Taming of the Shrew', 'William Shakespeare', 'bee', 20221215, 20221222, 00000000),
+(1, 'Pride and Prejudice', 'Jane Austen', 'ash', 20221220, 20221227, 00000000),
+(8, 'The Picture of Dorian Gray', 'Oscar Wilde', 'elle', 20230124, 20230131, 00000000),
+(4, 'Dracula', 'Bram Stoker', 'fawn', 20230107, 20230114, 00000000),
+(11, 'The Secret History', 'Donna Tartt','lea', 20230203,20230210, 00000000),
+(14, 'To Kill a Mockingbird', 'Harper Lee','kim', 20230205,20230212, 00000000);
