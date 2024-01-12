@@ -6,3 +6,4 @@ The Project contains two sign-in modes, Admin and User. User mode is restricted 
 
 The project involves Graphical User Interface (GUI) using Tkinter . GUI enables users to interact using various visual indicators such as buttons, windows, entry boxes, etc. Tkinter is the standard GUI library for Python. The code is designed in such a way that it provides complete control to the user. It handles the common mistakes and exceptions, thus being user-friendly.
 
+Created in a team of 3, I was responsible for Creation and Connection of the Database.
